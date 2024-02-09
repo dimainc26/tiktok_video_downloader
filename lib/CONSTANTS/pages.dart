@@ -18,22 +18,24 @@ class AppPages {
         page: () => const SwipeScreen(),
         binding: SwipeBinding()),
 
-    // GetPage(
-    //     name: '/',
-    //     page: () {
-    //       if (box.hasData('account')) {
-    //         return const TestScreen();
-    //       } else {
-    //         return const SplashScreen();
-    //       }
-    //     },
-    //     binding: box.hasData('account') ? TestBinding() : SplashBinding()),
-    // GetPage(
-    //     name: '/onboard',
-    //     page: () => const OnBoardingScreen(),
-    //     binding: OnboardBinding()),
     GetPage(
-        name: '/', page: () => const SwipeScreen(), binding: SwipeBinding()),
+        name: '/',
+        page: () {
+          if (box.hasData('isFirstTime')) {
+            return const SwipeScreen();
+          } else {
+            return const SplashScreen();
+          }
+        },
+        binding: box.hasData('isFirstTime') ? SwipeBinding() : SplashBinding()),
+    GetPage(
+        name: '/onboard',
+        page: () => const OnBoardingScreen(),
+        binding: OnboardBinding()),
+    GetPage(
+        name: '/swipes',
+        page: () => const SwipeScreen(),
+        binding: SwipeBinding()),
     GetPage(
         name: '/gallery',
         page: () => const GalleryScreen(),
@@ -50,18 +52,6 @@ class AppPages {
         name: '/home',
         page: () => const SwipeScreen(),
         binding: SwipeBinding()),
-    // GetPage(
-    //     name: '/loader',
-    //     page: () => const LoaderScreen(),
-    //     binding: LoaderBinding()),
-    // GetPage(
-    //     name: '/player',
-    //     page: () => const PlayerScreen(),
-    //     binding: PlayerBinding()),
-    // GetPage(
-    //     name: '/music',
-    //     page: () => const MusicScreen(),
-    //     binding: MusicBinding()),
     GetPage(
         name: '/sets',
         page: () => const SettingsScreen(),

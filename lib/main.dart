@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'TikiDown',
+      debugShowCheckedModeBanner: false,
+      title: 'TikiDown - TikTok Video Downloader',
       theme: ThemeData(
         primarySwatch: thirdSwatch,
       ),
