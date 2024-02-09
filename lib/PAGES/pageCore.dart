@@ -40,24 +40,15 @@ export 'MUSIC/music_binding.dart';
 export 'MUSIC/music_controller.dart';
 export 'MUSIC/music_view.dart';
 
-// // Player
-// export 'PLAYER/player_view.dart';
-// export 'PLAYER/player_binding.dart';
-// export 'PLAYER/player_controller.dart';
+// Settings
+export 'SETTINGS/settings_view.dart';
+export 'SETTINGS/settings_controller.dart';
+export 'SETTINGS/settings_binding.dart';
 
-// // Music
-// export 'MUSIC/music_view.dart';
-// export 'MUSIC/music_binding.dart';
-// export 'MUSIC/music_controller.dart';
-
-// // Settings
-// export 'SETTINGS/settings_view.dart';
-// export 'SETTINGS/settings_controller.dart';
-// export 'SETTINGS/settings_binding.dart';
-
-// // Tutor
-// export 'TUTOR/tutor_view.dart';
-// export 'TUTOR/tutor_controller.dart';
-// export 'TUTOR/tutor_binding.dart';
+// Tutor
+export 'TUTOR/tutor_view.dart';
+export 'TUTOR/tutor_controller.dart';
+export 'TUTOR/tutor_binding.dart';
 
 export 'package:tiktok_video_downloader/MODELS/AdController.dart';
+export 'package:tiktok_video_downloader/MODELS/ad_helper.dart';

@@ -62,13 +62,13 @@ class AppPages {
     //     name: '/music',
     //     page: () => const MusicScreen(),
     //     binding: MusicBinding()),
-    // GetPage(
-    //     name: '/sets',
-    //     page: () => const SettingsScreen(),
-    //     binding: SettingsBinding()),
-    // GetPage(
-    //     name: '/tutor',
-    //     page: () => const TutorScreen(),
-    //     binding: TutorBinding()),
+    GetPage(
+        name: '/sets',
+        page: () => const SettingsScreen(),
+        binding: SettingsBinding()),
+    GetPage(
+        name: '/tutor',
+        page: () => const TutorScreen(),
+        binding: TutorBinding()),
   ];
 }
