@@ -1,7 +1,11 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'CORE/core.dart';
 
 void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const MyApp());
 }
 

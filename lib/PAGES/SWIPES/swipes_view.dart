@@ -2,6 +2,9 @@
 
 import 'dart:io';
 import 'dart:developer';
+import 'dart:math';
+
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '/CORE/core.dart';
 
@@ -10,6 +13,9 @@ class SwipeScreen extends GetView<SwipeController> {
 
   @override
   Widget build(BuildContext context) {
+    final adController = Get.find<AdController>();
+    adController.createBannerAd();
+
     return Scaffold(
       body: SizedBox(
         width: Get.width,
@@ -19,6 +25,20 @@ class SwipeScreen extends GetView<SwipeController> {
           children: [
             PageView(
               controller: controller.pageController,
+              onPageChanged: (int page) async {
+                controller.currentIndicator.value = page;
+
+                if (page == 1) {
+                  var r = Random().nextInt(100);
+                  if (r > 00) {
+                    if (adController.interstitialAd != null) {
+                      await adController.interstitialAd?.show();
+                    } else {
+                      adController.createInterstitialAd();
+                    }
+                  }
+                }
+              },
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -117,19 +137,19 @@ class SwipeScreen extends GetView<SwipeController> {
                         padding: EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
-                            // Obx(
-                            //   () => controller.startBannerAd.value == true
-                            //       ?
-                            // SizedBox(
-                            //     width: controller.bannerAd!.size.width
-                            //         .toDouble(),
-                            //     height: controller.bannerAd!.size.height
-                            //         .toDouble(),
-                            //     child: AdWidget(ad: controller.bannerAd!),
-                            //   )
-                            // :
-                            Text(""),
-                            // ),
+                            Obx(
+                              () => adController.startBannerAd.value == true
+                                  ? SizedBox(
+                                      height: adController.bannerAd!.size.height
+                                          .toDouble(),
+                                      width: adController.bannerAd!.size.width
+                                          .toDouble(),
+                                      child:
+                                          AdWidget(ad: adController.bannerAd!),
+                                    )
+                                  : Text(""),
+                            )
+
                             // TextButton(
                             //     onPressed: () => controller.deleteStorage(),
                             //     child: const Text("Delete Storage")),

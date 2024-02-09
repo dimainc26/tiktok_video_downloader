@@ -12,7 +12,7 @@ import '../../MYPACKAGES/PhoneInfos.dart';
 import '/CORE/core.dart';
 
 class SwipeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+    with GetSingleTickerProviderStateMixin, WidgetsBindingObserver {
   // Controllers
   late PageController pageController;
   late PageController downPageController;
@@ -38,6 +38,9 @@ class SwipeController extends GetxController
   PhoneInfos phoneInfos = PhoneInfos();
   VideoInfo? videoData = VideoInfo(url: "");
 
+  // Controllers
+  final AdController adController = Get.put(AdController());
+
   // Storage
   final box = GetStorage();
 
@@ -50,6 +53,10 @@ class SwipeController extends GetxController
     tabBarController = TabController(length: 3, vsync: this, initialIndex: 0);
     downPageController = PageController(initialPage: tabSelectedPage.value);
     currentIndicator = pageController.initialPage.obs;
+    WidgetsBinding.instance.addObserver(this);
+    Future.delayed(const Duration(seconds: 5), () {
+      adController.showAppOpenAdIfAvailable();
+    });
   }
 
   @override
@@ -63,7 +70,17 @@ class SwipeController extends GetxController
     // TODO: implement onClose
     super.onClose();
     linkController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
   }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   super.didChangeAppLifecycleState(state);
+  //   if (state == AppLifecycleState.resumed) {
+  //     final adController = Get.find<AdController>();
+  //     adController.showAppOpenAdIfAvailable();
+  //   }
+  // }
 
   // Methods
   isFirstTime() async {
