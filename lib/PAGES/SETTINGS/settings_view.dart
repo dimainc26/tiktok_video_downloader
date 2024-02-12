@@ -76,7 +76,7 @@ class SettingsScreen extends GetView<SettingsController> {
                             width: adController.bannerAd!.size.width.toDouble(),
                             child: AdWidget(ad: adController.bannerAd!),
                           )
-                        : Text(""),
+                        : const Text(""),
                   )
                 ],
               ),

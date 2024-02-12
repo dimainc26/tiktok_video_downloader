@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'dart:developer';
 import '/CORE/core.dart';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 class SettingsController extends GetxController {
   @override
   void onInit() {
@@ -42,7 +40,6 @@ class SettingsController extends GetxController {
   Future<void> shareApp() async {
     const String appLink =
         'https://play.google.com/store/apps/details?id=inc.dima.tikidown';
-    const String message = 'Check out my new app: $appLink';
 
     await Share.share(appLink);
   }

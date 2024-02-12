@@ -1,12 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:tiktok_video_downloader/MODELS/VideoModel.dart';
-import 'package:tiktok_video_downloader/MODELS/videos_class.dart';
+import '/MODELS/VideoModel.dart';
+import '/MODELS/videos_class.dart';
 
 import '/CORE/core.dart';
 
@@ -272,7 +272,7 @@ class ImagesPopup extends StatelessWidget {
 }
 
 class DeletePopup extends StatelessWidget {
-  DeletePopup({super.key});
+  const DeletePopup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -324,7 +324,6 @@ class DeleteController extends GetxController {
   RxList list = [].obs;
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     list.value = Get.arguments;
   }
@@ -332,8 +331,6 @@ class DeleteController extends GetxController {
   eraseFiles() {
     RxList list = Get.find<SwipeController>().filesList;
     var toRemove = [];
-    // log("filesList(START) : " + list.length.toString());
-
     for (var element in list) {
       if (element["isSelected"].value == true) {
         File delFile = File(element["path"]);
@@ -344,29 +341,28 @@ class DeleteController extends GetxController {
 
     RxList dataList = [].obs;
     dataList.value = jsonDecode(box.read("dataList"));
-    dataList.forEach((e) {
+    for (var e in dataList) {
       e["isSelected"] = false.obs;
-    });
-    log("BEFORE: " + dataList.value.length.toString());
+    }
+    log("BEFORE: ${dataList.length}");
 
     dataList.removeWhere(
         (aItem) => toRemove.any((bItem) => aItem["path"] == bItem["path"]));
-    log("AFTER: " + dataList.value.length.toString());
+    log("AFTER: ${dataList.length}");
 
     list.removeWhere((element) => toRemove.contains(element));
-
     Get.find<SwipeController>().deselectAll(list: list);
 
-    dataList.forEach((e) {
+    for (var e in dataList) {
       e["isSelected"] = false;
-    });
+    }
 
     final saveList = jsonEncode(dataList);
     box.write("dataList", saveList).then((value) {
       box.save();
-      list.forEach((e) {
+      for (var e in list) {
         e["isSelected"] = false.obs;
-      });
+      }
     });
     Get.find<SwipeController>().update();
     Get.back();
@@ -447,7 +443,8 @@ class MenuPopup extends StatelessWidget {
                           SvgPicture.asset(
                             delete_icon,
                             width: 25,
-                            color: secondColor,
+                            colorFilter: const ColorFilter.mode(
+                                secondColor, BlendMode.srcIn),
                           ),
                         ],
                       ),
@@ -471,7 +468,8 @@ class MenuPopup extends StatelessWidget {
                         shape: BoxShape.circle, color: thirdColor),
                     child: SvgPicture.asset(
                       shareIcon,
-                      color: firstColor,
+                      colorFilter:
+                          const ColorFilter.mode(firstColor, BlendMode.srcIn),
                     ),
                   ),
                 ),
@@ -499,17 +497,16 @@ class MenuController extends GetxController {
 
     list.removeWhere((element) => toRemove.contains(element));
 
-    list.forEach((e) {
+    for (var e in list) {
       e["isSelected"] = false;
-    });
+    }
 
     final saveList = jsonEncode(list);
     box.write("dataList", saveList).then((value) {
       box.save();
-      list.forEach((e) {
+      for (var e in list) {
         e["isSelected"] = false.obs;
-      });
-      RxList list2 = Get.find<SwipeController>().filesList;
+      }
       Get.find<SwipeController>().update();
     });
 

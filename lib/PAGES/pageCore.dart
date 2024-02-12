@@ -40,5 +40,5 @@ export 'TUTOR/tutor_view.dart';
 export 'TUTOR/tutor_controller.dart';
 export 'TUTOR/tutor_binding.dart';
 
-export 'package:tiktok_video_downloader/MODELS/AdController.dart';
-export 'package:tiktok_video_downloader/MODELS/ad_helper.dart';
+export '/MODELS/AdController.dart';
+export '/MODELS/ad_helper.dart';

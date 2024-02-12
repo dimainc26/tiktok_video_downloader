@@ -1,4 +1,4 @@
-package com.example.tiktok_video_downloader
+package inc.dima.tikidown
 
 import io.flutter.embedding.android.FlutterActivity
 

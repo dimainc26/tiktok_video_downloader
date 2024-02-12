@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -41,8 +43,8 @@ class AdController extends GetxController {
   void showAppOpenAdIfAvailable() {
     if (!_isAppOpenAdAvailable || _appOpenAd == null) return;
 
-    final isAdExpired =
-        DateTime.now().difference(_lastAppOpenAdLoadTime!) > Duration(hours: 4);
+    final isAdExpired = DateTime.now().difference(_lastAppOpenAdLoadTime!) >
+        const Duration(hours: 4);
     if (isAdExpired) {
       _loadAppOpenAd();
       return;
@@ -76,7 +78,7 @@ class AdController extends GetxController {
   void createInterstitialAd() {
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           interstitialAd = ad;
@@ -103,7 +105,7 @@ class AdController extends GetxController {
 
   void showInterstitialAd() {
     if (interstitialAd == null) {
-      print('Warning: attempt to show interstitial before loaded.');
+      log('Warning: attempt to show interstitial before loaded.');
       return;
     }
     interstitialAd!.show();
@@ -120,7 +122,7 @@ class AdController extends GetxController {
           _setRewardedAdListener();
         },
         onAdFailedToLoad: (error) {
-          print('Failed to load a rewarded ad: $error');
+          log('Failed to load a rewarded ad: $error');
         },
       ),
     );

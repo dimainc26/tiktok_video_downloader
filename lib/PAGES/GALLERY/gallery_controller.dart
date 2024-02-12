@@ -1,4 +1,4 @@
-import 'package:tiktok_video_downloader/WIDGETS/popup.dart';
+import '/WIDGETS/popup.dart';
 
 import '/CORE/core.dart';
 

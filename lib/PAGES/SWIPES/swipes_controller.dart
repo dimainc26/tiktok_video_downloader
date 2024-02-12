@@ -1,11 +1,13 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tiktok_video_downloader/MODELS/videos_class.dart';
-import 'package:tiktok_video_downloader/MYPACKAGES/VerifyStorage.dart';
-import 'package:tiktok_video_downloader/WIDGETS/popup.dart';
+import '/MODELS/videos_class.dart';
+import '/MYPACKAGES/VerifyStorage.dart';
+import '/WIDGETS/popup.dart';
 
 import '../../MODELS/VideoModel.dart';
 import '../../MYPACKAGES/PhoneInfos.dart';
@@ -30,7 +32,7 @@ class SwipeController extends GetxController
   RxList filesList = [].obs;
 
   // Duration
-  final Duration animationDuration = Duration(seconds: 1);
+  final Duration animationDuration = const Duration(seconds: 1);
 
   // Class Instance
   VideoModel videoModel = VideoModel();
@@ -46,7 +48,6 @@ class SwipeController extends GetxController
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     isFirstTime();
     pageController = PageController(initialPage: 0);
@@ -60,14 +61,7 @@ class SwipeController extends GetxController
   }
 
   @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-  }
-
-  @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     linkController.dispose();
     WidgetsBinding.instance.removeObserver(this);
@@ -99,10 +93,6 @@ class SwipeController extends GetxController
   Future<Map<String, dynamic>> getPhoneInfo() async {
     var phone = await phoneInfos.deviceInfos();
     phone.addAll({"photoPermission": false, "musicPrmission": false});
-    // phone.entries.forEach((e) {
-    //   log(e.toString());
-    // });
-
     return phone;
   }
 
@@ -124,8 +114,6 @@ class SwipeController extends GetxController
 
     for (var shareElement in filesToShare) {
       for (var share in shareElement) {
-        // log("$share");
-
         if (share["isSelected"].value == true) {
           shares.add(XFile(share["path"]));
           goodShare.value = false;
@@ -138,8 +126,6 @@ class SwipeController extends GetxController
 
       for (var shareElement in filesToShare) {
         for (var share in shareElement) {
-          // log("$share");
-
           if (share["isSelected"].value == true) {
             share["isSelected"].value = false;
           }
@@ -151,11 +137,6 @@ class SwipeController extends GetxController
   }
 
   deselectAll({required RxList list}) async {
-    for (var deselect in list) {
-      // if (deselect["isSelected"].value == true) {
-      //   deselect["isSelected"].value = false;
-      // }
-    }
     selectionMode.value = false;
   }
 
@@ -173,7 +154,7 @@ class SwipeController extends GetxController
   deleteFile() {
     Get.bottomSheet(
       settings: RouteSettings(arguments: filesList),
-      DeletePopup(),
+      const DeletePopup(),
     );
   }
 
@@ -183,21 +164,7 @@ class SwipeController extends GetxController
     log("box deleted");
   }
 
-  getInfo() {
-    var me = box.read("dataList");
-    // log(me);
-    // RxList x = [].obs;
-    // x.value = jsonDecode(me);
-    // x.removeAt(0);
-    // x.forEach((element) {
-    //   log(element.toString());
-    // });
-    // box.remove("dataList").then((value) {
-    //   box.save();
-    //   log("removed");
-    // });
-    // box.write("dataList", jsonEncode(x)).then((value) => box.save());
-  }
+  getInfo() {}
 
   fetchDatas({required String link}) async {
     var linkTest = link.contains(RegExp('https://'));
@@ -237,7 +204,7 @@ class SwipeController extends GetxController
                       child: Stack(
                         children: [
                           PageView.builder(
-                              itemCount: datas!.images!.length,
+                              itemCount: datas.images!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Container(
                                   width: Get.width - 20,
@@ -246,8 +213,7 @@ class SwipeController extends GetxController
                                     borderRadius: BorderRadius.circular(12),
                                     color: Colors.grey,
                                     image: DecorationImage(
-                                      image:
-                                          NetworkImage(datas!.images![index]),
+                                      image: NetworkImage(datas.images![index]),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -263,17 +229,17 @@ class SwipeController extends GetxController
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
-                                      "P: ${datas!.plays!}",
+                                      "P: ${datas.plays!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "S: ${datas!.shares!}",
+                                      "S: ${datas.shares!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "C: ${datas!.comments!}",
+                                      "C: ${datas.comments!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -291,7 +257,7 @@ class SwipeController extends GetxController
                                     Border.all(color: Colors.grey, width: 2),
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: NetworkImage(datas!.avatar!),
+                                  image: NetworkImage(datas.avatar!),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -301,7 +267,7 @@ class SwipeController extends GetxController
                               bottom: 0,
                               left: 120,
                               child: Text(
-                                "@${datas!.name!} / ${datas!.username!}",
+                                "@${datas.name!} / ${datas.username!}",
                                 style: const TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold),
                               )),
@@ -311,7 +277,7 @@ class SwipeController extends GetxController
                     height: 40,
                   ),
                   LargeButton(
-                      text: "Downloads ${datas!.images!.length} Image(s)",
+                      text: "Downloads ${datas.images!.length} Image(s)",
                       onTap: () {
                         downloadImages();
                         Get.back();
@@ -347,7 +313,7 @@ class SwipeController extends GetxController
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.grey,
                               image: DecorationImage(
-                                image: NetworkImage(datas!.cover!),
+                                image: NetworkImage(datas.cover!),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -362,17 +328,17 @@ class SwipeController extends GetxController
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
-                                      "P: ${datas!.plays!}",
+                                      "P: ${datas.plays!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "S: ${datas!.shares!}",
+                                      "S: ${datas.shares!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "C: ${datas!.comments!}",
+                                      "C: ${datas.comments!}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -390,7 +356,7 @@ class SwipeController extends GetxController
                                     Border.all(color: Colors.grey, width: 2),
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: NetworkImage(datas!.avatar!),
+                                  image: NetworkImage(datas.avatar!),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -400,7 +366,7 @@ class SwipeController extends GetxController
                               bottom: 40,
                               left: 120,
                               child: Text(
-                                "@${datas!.name!} / ${datas!.username!}",
+                                "@${datas.name!} / ${datas.username!}",
                                 style: const TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold),
                               )),
@@ -471,10 +437,6 @@ class SwipeController extends GetxController
       downloading.value = true;
       downloadProgress = await videoModel.downloadMedia(
           mode: "authentik", datas: videoData!, date: DateTime.now());
-      if (downloadProgress.value == 1.0) {
-        log("${downloadProgress.value}   ${downloading.value}");
-        downloading.value = false;
-      }
     } else {
       if (await verifyStorage.requestPermission(phone["version.sdkInt"] < 33
           ? Permission.storage
@@ -592,7 +554,6 @@ class SwipeController extends GetxController
         downloadProgress,
         (callback) => {
               if (downloadProgress.value == 1.0) {downloading.value = false},
-              //TODO Success Popup
             });
   }
 
@@ -612,50 +573,22 @@ class SwipeController extends GetxController
   getImages() async {
     filesList = [].obs;
     filesList = await getMedia.getImages();
-    for (var file in filesList) {
-      if (file is File) {
-        String nameWithType = file.path.split("/").last;
-        String name = nameWithType.split(".").first;
-        String type = nameWithType.split(".").last;
-        // log("name: $nameWithType");
-      }
-    }
-    // filesList.forEach((element) {
-    //   log(element.toString());
-    // });
-    log("list() : " + filesList.length.toString());
+    log("list() : ${filesList.length}");
   }
 
   getVideos() async {
     filesList = [].obs;
     filesList = await getMedia.getVideos();
-    for (var file in filesList) {
-      if (file is File) {
-        String nameWithType = file.path.split("/").last;
-        String name = nameWithType.split(".").first;
-        String type = nameWithType.split(".").last;
-        // log("name: $nameWithType");
-      }
-    }
-
-    // filesList.forEach((element) {
-    //   log(element.toString());
-    // });
-    log("list() : " + filesList.length.toString());
+    log("list() : ${filesList.length}");
   }
 
   getMusics() async {
     filesList = await getMedia.getMusics();
     for (var file in filesList) {
-      if (file is File) {
-        String nameWithType = file.path.split("/").last;
-        String name = nameWithType.split(".").first;
-        String type = nameWithType.split(".").last;
-        log("name: $nameWithType");
-      }
+      if (file is File) {}
     }
 
-    log("list() : " + filesList.length.toString());
+    log("list() : ${filesList.length}");
   }
 
   // Change pages

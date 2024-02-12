@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart' as d;
-import 'package:tiktok_video_downloader/MYPACKAGES/GenerateRandom.dart';
-import 'package:tiktok_video_downloader/MYPACKAGES/VerifyStorage.dart';
+import '/MYPACKAGES/GenerateRandom.dart';
+import '/MYPACKAGES/VerifyStorage.dart';
 import '/CORE/core.dart';
 
 import 'videos_class.dart';

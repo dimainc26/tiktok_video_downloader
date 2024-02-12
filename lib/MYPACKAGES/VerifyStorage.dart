@@ -180,7 +180,7 @@ class GetMedia {
     for (var e in dataList) {
       e["isSelected"] = false.obs;
     }
-    log("TOTAL IMAGES: " + dataList.length.toString());
+    log("TOTAL IMAGES: ${dataList.length}");
 
     return dataList;
   }
@@ -213,7 +213,7 @@ class GetMedia {
     for (var e in dataList) {
       e["isSelected"] = false.obs;
     }
-    log("TOTAL VIDEOS: " + dataList.length.toString());
+    log("TOTAL VIDEOS: ${dataList.length}");
     return dataList;
   }
 
@@ -245,7 +245,7 @@ class GetMedia {
     for (var e in dataList) {
       e["isSelected"] = false.obs;
     }
-    log("TOTAL MUSICS: " + dataList.length.toString());
+    log("TOTAL MUSICS: ${dataList.length}");
 
     return dataList;
   }

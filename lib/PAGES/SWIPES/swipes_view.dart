@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
