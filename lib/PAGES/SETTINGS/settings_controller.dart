@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'dart:developer';
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class SettingsController extends GetxController {
   @override
@@ -24,9 +24,9 @@ class SettingsController extends GetxController {
       total.value = datas.length;
       videosLenght.value =
           datas.where((p) => p["type"] == ".mp4").toList().length;
-      coversLenght.value =
-          datas.where((type) => type["type"] == ".mp3").toList().length;
       musicsLenght.value =
+          datas.where((type) => type["type"] == ".mp3").toList().length;
+      coversLenght.value =
           datas.where((type) => type["type"] == ".jpg").toList().length;
     } else {
       datas.value = [];

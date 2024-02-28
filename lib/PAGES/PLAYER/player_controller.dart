@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayerController extends GetxController {

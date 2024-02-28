@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '/PAGES/MUSIC/music_controller.dart';
+import 'package:tikidown/PAGES/MUSIC/music_controller.dart';
 
 class MusicBinding extends Bindings {
   @override

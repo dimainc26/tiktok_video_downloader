@@ -1,4 +1,4 @@
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class NavigateButton extends StatelessWidget {
   const NavigateButton({

@@ -1,5 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class SettingsScreen extends GetView<SettingsController> {
   const SettingsScreen({Key? key}) : super(key: key);

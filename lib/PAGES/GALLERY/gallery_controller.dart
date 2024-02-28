@@ -1,6 +1,6 @@
-import '/WIDGETS/popup.dart';
+import 'package:tikidown/WIDGETS/popup.dart';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class GalleryController extends GetxController {
   dynamic list;

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class GalleryScreen extends GetView<GalleryController> {
   const GalleryScreen({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 void main() async {
   await GetStorage.init();
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'TikiDown - TikTok Video Downloader',
+      title: 'TikiDown - TikTok Video Saver',
       theme: ThemeData(
         primarySwatch: thirdSwatch,
       ),

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '/PAGES/SPLASH/splash_controller.dart';
+import 'package:tikidown/PAGES/SPLASH/splash_controller.dart';
 
 class SplashBinding extends Bindings {
   @override

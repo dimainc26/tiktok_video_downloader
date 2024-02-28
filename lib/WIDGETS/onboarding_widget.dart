@@ -1,5 +1,4 @@
-// import 'package:rive/rive.dart';
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class Onboard extends StatelessWidget {
   const Onboard({

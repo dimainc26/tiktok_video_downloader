@@ -6,6 +6,10 @@ const String img = "imgs/";
 // IMAGES
 const String logoImg = "${img}logo.png";
 
+// GIFS
+const String music_gif = "${img}music.gif";
+const String cover_gif = "${img}cover.gif";
+
 // Splash
 const String logoAnim = "${img}logo.riv";
 const String loaderAnim = "${img}loader.riv";
@@ -23,6 +27,7 @@ const String pause_icon = "${img}pause.svg";
 const String left_icon = "${img}arrow-left.svg";
 const String right_icon = "${img}arrow-right.svg";
 const String warning_icon = "${img}warning.svg";
+const String error_link_icon = "${img}error_link.svg";
 
 const String shareIcon = "${img}share.svg";
 const String copyIcon = "${img}copy.svg";

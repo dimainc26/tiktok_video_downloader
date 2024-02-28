@@ -1,9 +1,8 @@
 // ignore_for_file: unused_import, unnecessary_overrides
 
 import 'dart:async';
-import 'dart:developer';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class TutorController extends GetxController {
   RxInt currentStep = 0.obs;

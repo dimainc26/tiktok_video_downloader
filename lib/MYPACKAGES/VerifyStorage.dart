@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:dio/dio.dart' as d;
 import 'package:permission_handler/permission_handler.dart';
 
-import '../CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class VerifyStorage {
   Directory directory = Directory("/DCIM");

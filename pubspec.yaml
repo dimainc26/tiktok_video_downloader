@@ -1,7 +1,7 @@
 name: tikidown
-description: A new Flutter project.
+description: TikiDown - TikTok Video Saver.
 publish_to: 'none'
-version: 0.1.0
+version: 1.9.4+12
 
 environment:
   sdk: '>=3.1.3 <4.0.0'
@@ -34,4 +34,3 @@ flutter:
 
   assets:
     - imgs/
-    - fonts/

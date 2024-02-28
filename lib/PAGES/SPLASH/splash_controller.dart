@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class SplashController extends GetxController {
   Duration duration = const Duration(milliseconds: 2500);

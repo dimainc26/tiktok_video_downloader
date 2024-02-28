@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '/PAGES/SETTINGS/settings_controller.dart';
+import 'package:tikidown/PAGES/SETTINGS/settings_controller.dart';
 
 class SettingsBinding extends Bindings {
   @override

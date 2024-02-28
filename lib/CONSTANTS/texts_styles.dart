@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/CONSTANTS/colors.dart';
+import 'package:tikidown/CONSTANTS/colors.dart';
 
 // Text Styles
 const firstTitle = TextStyle(

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 class MusicController extends GetxController {

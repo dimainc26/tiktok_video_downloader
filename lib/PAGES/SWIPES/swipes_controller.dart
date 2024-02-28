@@ -1,20 +1,22 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
-import '/MODELS/videos_class.dart';
-import '/MYPACKAGES/VerifyStorage.dart';
-import '/WIDGETS/popup.dart';
+import 'package:tikidown/MODELS/videos_class.dart';
+import 'package:tikidown/MYPACKAGES/VerifyStorage.dart';
+import 'package:tikidown/WIDGETS/popup.dart';
 
-import '../../MODELS/VideoModel.dart';
-import '../../MYPACKAGES/PhoneInfos.dart';
-import '/CORE/core.dart';
+import 'package:tikidown/MODELS/VideoModel.dart';
+import 'package:tikidown/MYPACKAGES/PhoneInfos.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class SwipeController extends GetxController
     with GetSingleTickerProviderStateMixin, WidgetsBindingObserver {
+  // Channels
+  static const platform = MethodChannel('inc.dima.tikidown/intent');
+
   // Controllers
   late PageController pageController;
   late PageController downPageController;
@@ -46,6 +48,8 @@ class SwipeController extends GetxController
   // Storage
   final box = GetStorage();
 
+  dynamic sharedText = {"status": false, "value": ""};
+
   @override
   void onInit() {
     super.onInit();
@@ -54,6 +58,8 @@ class SwipeController extends GetxController
     tabBarController = TabController(length: 3, vsync: this, initialIndex: 0);
     downPageController = PageController(initialPage: tabSelectedPage.value);
     currentIndicator = pageController.initialPage.obs;
+    // directFetch();
+    checkClipboardForLink();
     WidgetsBinding.instance.addObserver(this);
     Future.delayed(const Duration(seconds: 5), () {
       adController.showAppOpenAdIfAvailable();
@@ -67,14 +73,14 @@ class SwipeController extends GetxController
     WidgetsBinding.instance.removeObserver(this);
   }
 
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   super.didChangeAppLifecycleState(state);
-  //   if (state == AppLifecycleState.resumed) {
-  //     final adController = Get.find<AdController>();
-  //     adController.showAppOpenAdIfAvailable();
-  //   }
-  // }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      final adController = Get.find<AdController>();
+      adController.showAppOpenAdIfAvailable();
+    }
+  }
 
   // Methods
   isFirstTime() async {
@@ -87,6 +93,46 @@ class SwipeController extends GetxController
       box
           .writeIfNull("dataList", jsonEncode(dataList.value))
           .then((value) => box.save());
+    }
+  }
+
+  Future<Map<String, dynamic>> getSharedText() async {
+    try {
+      final String result = await platform.invokeMethod('getSharedText');
+      sharedText["status"] = true;
+      sharedText["value"] = result;
+    } on PlatformException catch (e) {
+      sharedText["status"] = false;
+      sharedText["value"] = e.message.toString();
+    }
+
+    // log(sharedText.toString());
+    return sharedText;
+  }
+
+  void checkClipboardForLink() async {
+    ClipboardData? clipboardData =
+        await Clipboard.getData(Clipboard.kTextPlain);
+    String clipboardDataText = clipboardData?.text ?? "";
+    // log(clipboardDataText);
+    if (Uri.tryParse(clipboardDataText)?.hasAbsolutePath ?? false) {
+      fetchDatas(link: clipboardDataText);
+      Future.delayed(const Duration(seconds: 3), () {
+        Clipboard.setData(const ClipboardData(text: ""));
+        ;
+      });
+    } else {
+      // log("Aucun lien trouvé dans le presse-papiers.");
+    }
+  }
+
+  directFetch() async {
+    dynamic response = await getSharedText();
+    if (await response["status"] && response["status"] == true) {
+      fetchDatas(link: response["value"]);
+      Future.delayed(const Duration(seconds: 3), () {
+        sharedText["status"] = false;
+      });
     }
   }
 
@@ -104,7 +150,7 @@ class SwipeController extends GetxController
     final result = await Share.shareWithResult(appLink, subject: message);
 
     if (result.status == ShareResultStatus.success) {
-      log('Thank you for sharing my website!');
+      // log('Thank you for sharing my website!');
     }
   }
 
@@ -161,21 +207,28 @@ class SwipeController extends GetxController
   deleteStorage() async {
     box.erase();
     box.save();
-    log("box deleted");
+    // log("box deleted");
   }
 
   getInfo() {}
 
   fetchDatas({required String link}) async {
-    var linkTest = link.contains(RegExp('https://'));
+    RegExp regExp =
+        RegExp(r"https?:\/\/[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/))");
 
-    if (!linkTest) {
+    final match = regExp.firstMatch(link);
+
+    // var linkTest = link.contains(RegExp('https://'));
+
+    if (match == null) {
       Get.bottomSheet(const ErrorPopup(
-          errorTitle: "errorTitle",
-          errorText: "errorText",
-          errorImage: warning_icon));
+          errorTitle: "Link error",
+          errorText:
+              "Try to enter good link. \nExemple: https://vm.tiktok.com/....",
+          errorImage: error_link_icon));
     } else {
-      videoData = await videoModel.checkDatas(link);
+      // log(match.group(0)!);
+      videoData = await videoModel.checkDatas(match.group(0)!);
       if (videoData?.video == "" || videoData?.video == null) {
         Get.bottomSheet(const ErrorPopup(
             errorTitle: "errorTitle",
@@ -444,7 +497,7 @@ class SwipeController extends GetxController
         phone["photoPermission"] = true;
         box.write("phone", jsonEncode(phone));
 
-        log(phone["photoPermission"].toString());
+        // log(phone["photoPermission"].toString());
         downloadVideo();
       } else {
         Get.bottomSheet(const ErrorPopup(
@@ -475,7 +528,7 @@ class SwipeController extends GetxController
         phone["photoPermission"] = true;
         box.write("phone", jsonEncode(phone));
 
-        log(phone["photoPermission"].toString());
+        // log(phone["photoPermission"].toString());
         downloadWatermarkVideo();
       } else {
         Get.bottomSheet(const ErrorPopup(
@@ -500,7 +553,7 @@ class SwipeController extends GetxController
       downloadProgress = await videoModel.downloadMedia(
           mode: "images", datas: videoData!, date: DateTime.now());
       if (downloadProgress.value == 1.0) {
-        log("${downloadProgress.value}   ${downloading.value}");
+        // log("${downloadProgress.value}   ${downloading.value}");
         downloading.value = false;
       }
     } else {
@@ -510,7 +563,7 @@ class SwipeController extends GetxController
         phone["photoPermission"] = true;
         box.write("phone", jsonEncode(phone));
 
-        log(phone["photoPermission"].toString());
+        // log(phone["photoPermission"].toString());
         downloadImages();
       } else {
         Get.bottomSheet(const ErrorPopup(
@@ -541,7 +594,7 @@ class SwipeController extends GetxController
         phone["photoPermission"] = true;
         box.write("phone", jsonEncode(phone));
 
-        log(phone["photoPermission"].toString());
+        // log(phone["photoPermission"].toString());
         downloadMusic();
       } else {
         Get.bottomSheet(const ErrorPopup(
@@ -573,13 +626,13 @@ class SwipeController extends GetxController
   getImages() async {
     filesList = [].obs;
     filesList = await getMedia.getImages();
-    log("list() : ${filesList.length}");
+    // log("list() : ${filesList.length}");
   }
 
   getVideos() async {
     filesList = [].obs;
     filesList = await getMedia.getVideos();
-    log("list() : ${filesList.length}");
+    // log("list() : ${filesList.length}");
   }
 
   getMusics() async {
@@ -588,7 +641,7 @@ class SwipeController extends GetxController
       if (file is File) {}
     }
 
-    log("list() : ${filesList.length}");
+    // log("list() : ${filesList.length}");
   }
 
   // Change pages

@@ -1,4 +1,4 @@
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class SplashScreen extends GetView<SplashController> {
   const SplashScreen({Key? key}) : super(key: key);

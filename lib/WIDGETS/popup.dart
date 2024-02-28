@@ -1,14 +1,13 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: must_be_immutable
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
-import '/MODELS/VideoModel.dart';
-import '/MODELS/videos_class.dart';
+import 'package:tikidown/MODELS/VideoModel.dart';
+import 'package:tikidown/MODELS/videos_class.dart';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 VideoModel videoModel = VideoModel();
 
@@ -46,15 +45,15 @@ class ErrorPopup extends StatelessWidget {
               flex: 2,
               child: SvgPicture.asset(
                 errorImage,
-                colorFilter:
-                    const ColorFilter.mode(secondColor, BlendMode.srcIn),
+                // colorFilter:
+                //     const ColorFilter.mode(secondColor, BlendMode.saturation),
                 width: 100,
               ),
             ),
             Expanded(
               flex: 1,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   errorText,
                   style: formTitle,
@@ -344,11 +343,11 @@ class DeleteController extends GetxController {
     for (var e in dataList) {
       e["isSelected"] = false.obs;
     }
-    log("BEFORE: ${dataList.length}");
+    // log("BEFORE: ${dataList.length}");
 
     dataList.removeWhere(
         (aItem) => toRemove.any((bItem) => aItem["path"] == bItem["path"]));
-    log("AFTER: ${dataList.length}");
+    // log("AFTER: ${dataList.length}");
 
     list.removeWhere((element) => toRemove.contains(element));
     Get.find<SwipeController>().deselectAll(list: list);

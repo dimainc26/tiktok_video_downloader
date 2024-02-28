@@ -1,4 +1,4 @@
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class TutorScreen extends GetView<TutorController> {
   const TutorScreen({Key? key}) : super(key: key);

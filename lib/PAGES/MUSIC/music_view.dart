@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class MusicScreen extends GetView<MusicController> {
   const MusicScreen({Key? key}) : super(key: key);

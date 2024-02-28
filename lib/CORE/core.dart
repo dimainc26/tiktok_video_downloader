@@ -1,7 +1,7 @@
-export '/CONSTANTS/pages.dart';
-export '/PAGES/pageCore.dart';
-export '/CONSTANTS/constant_core.dart';
-export '/WIDGETS/widgetCore.dart';
+export 'package:tikidown/CONSTANTS/pages.dart';
+export 'package:tikidown/PAGES/pageCore.dart';
+export 'package:tikidown/CONSTANTS/constant_core.dart';
+export 'package:tikidown/WIDGETS/widgetCore.dart';
 
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';

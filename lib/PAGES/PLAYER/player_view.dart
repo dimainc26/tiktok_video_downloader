@@ -2,8 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:video_player/video_player.dart';
-
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 class PlayerScreen extends GetView<PlayerController> {
   const PlayerScreen({Key? key}) : super(key: key);

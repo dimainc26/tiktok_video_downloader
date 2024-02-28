@@ -12,6 +12,7 @@ class AdController extends GetxController {
   DateTime? _lastAppOpenAdLoadTime;
 
   BannerAd? bannerAd;
+  BannerAd? bannerAd2;
   InterstitialAd? interstitialAd;
   RewardedAd? rewardedAd;
 
@@ -60,6 +61,20 @@ class AdController extends GetxController {
 
   void createBannerAd() {
     bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          startBannerAd.value = true;
+          update();
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    )..load();
+    bannerAd2 = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),

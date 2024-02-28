@@ -1,4 +1,4 @@
-import '/CORE/core.dart';
+import 'package:tikidown/CORE/core.dart';
 
 // Nom prenom etc.
 class HighFormField extends StatelessWidget {
