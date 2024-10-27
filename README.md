@@ -5,10 +5,11 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/dimainc26/tiktok_video_downloader)
 
 ## Description
-**Tikidown** 
+**Tikidown** Tikidown est une application disponible sur le Play Store qui permet de télécharger des vidéos, de la musique et des images depuis TikTok sans le logo watermark. Elle est gratuite et intuitive, facilitant ainsi la sauvegarde rapide de vos contenus préférés directement sur votre appareil.
+
 ## Technologies utilisées
-- HTML
-- CSS
+- Flutter
+- GetX
 
 ## Captures d'écran
 ![Home Screen](https://github.com/dimainc26/tiktok_video_downloader/blob/main/assets/home.png)
