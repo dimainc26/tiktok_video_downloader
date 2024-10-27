@@ -15,7 +15,7 @@
 ![Home Screen](https://github.com/dimainc26/tiktok_video_downloader/blob/main/assets/home.png)
 
 ## Démo
-[Lien vers la démo]([https://play.google.com/store/apps/details?id=inc.dima.tikidown])
+[Lien vers la démo](https://play.google.com/store/apps/details?id=inc.dima.tikidown)
 
 ## Contributions
 Les contributions sont les bienvenues. N'hésitez pas à soumettre des pull requests ou à ouvrir des issues pour discuter des améliorations.
